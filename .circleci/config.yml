@@ -1,0 +1,20 @@
+version: 2
+jobs:
+  build:
+    working_diretory: ~/circleci-demo-java-spring
+    docker:
+      - image: notnoopci/java:8-jdk
+    steps:
+      - checkout
+      - restore_cache:
+          key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
+      - run: mvn dependency:resolve
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
+      - run: mvn test
+      - run: mvn package
+      - store_artifacts:
+          path: target/circleci-demo-java-spring.jar
+          destination: uberjar
