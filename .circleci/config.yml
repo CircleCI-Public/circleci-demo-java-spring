@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_diretory: ~/circleci-demo-java-spring
+    working_directory: ~/circleci-demo-java-spring
     docker:
       - image: notnoopci/java:8-jdk
     steps:
