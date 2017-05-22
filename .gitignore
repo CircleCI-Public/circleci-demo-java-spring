@@ -25,3 +25,6 @@ buildNumber.properties
 
 .classpath
 .project
+
+# Editor and IDE Specific
+.vscode/
