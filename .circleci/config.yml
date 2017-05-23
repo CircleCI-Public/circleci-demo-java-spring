@@ -1,20 +1,30 @@
 version: 2
 jobs:
   build:
+    
     working_directory: ~/circleci-demo-java-spring
+
     docker:
       - image: notnoopci/java:8-jdk
+
     steps:
+
       - checkout
+
       - restore_cache:
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
+      
       - run: mvn dependency:go-offline
+      
       - save_cache:
           paths:
             - ~/.m2
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}-{{ epoch }}
+      
       - run: mvn package
+      
       - store_test_results:
           path: target/surefire-reports/.*xml
+      
       - store_artifacts:
           path: target/demo-java-spring-0.0.1-SNAPSHOT.jar
