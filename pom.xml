@@ -81,20 +81,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<profiles>
-		<profile>
-			<id>ci</id>
-			<activation>
-				<property>
-					<name>env.CIRCLECI</name>
-					<value>true</value>
-				</property>
-			</activation>
-			<properties>
-			</properties>
-		</profile>
-	</profiles>
-
-
+	
 </project>
