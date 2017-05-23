@@ -1,4 +1,4 @@
-package com.circleci.demojavaspring;
+package com.circleci.demojavaspring.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
