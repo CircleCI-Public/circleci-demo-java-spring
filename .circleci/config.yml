@@ -13,7 +13,6 @@ jobs:
           paths:
             - ~/.m2
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
-      - run: mvn test
       - run: mvn package
       - store_artifacts:
           path: target/circleci-demo-java-spring.jar
