@@ -5,9 +5,10 @@ This is an example application showcasing how to run a Java app on CircleCI 2.0.
 This application uses the following tools: 
 
 * Maven 
-* Spring 
 * Java 8 
 * PostgreSQL 
+* Spring 
+* Thymeleaf
 
 You can follow along with this project by reading the [documentation](https://circleci.com/docs/2.0/language-java/).
 
