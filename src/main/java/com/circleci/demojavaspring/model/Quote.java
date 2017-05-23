@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Quote {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 
     private Integer personId;
