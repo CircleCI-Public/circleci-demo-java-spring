@@ -12,8 +12,8 @@ jobs:
       - save_cache:
           paths:
             - ~/.m2
-          key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
+          key: circleci-demo-java-spring-{{ checksum "pom.xml" }}-{{ epoch }}
       - run: mvn package
       - store_artifacts:
-          path: target/circleci-demo-java-spring.jar
+          path: target/circleci-demo-java-spring-0.0.1-SNAPSHOT.jar
           destination: uberjar
