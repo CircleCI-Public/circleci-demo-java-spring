@@ -12,6 +12,8 @@ jobs:
 
       - checkout
 
+      - run: mvn help:active-profiles
+
       - restore_cache:
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
       
