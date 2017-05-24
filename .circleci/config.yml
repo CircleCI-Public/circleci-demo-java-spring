@@ -5,12 +5,12 @@ jobs:
     working_directory: ~/circleci-demo-java-spring
 
     docker:
-      - image: notnoopci/openjdk:8-jdk-browsers
+      - image: circleci/openjdk:8-jdk-browsers
       - image: circleci/postgres:9.6.3-alpine
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: circle_test
-          
+
     steps:
 
       - checkout
@@ -23,7 +23,7 @@ jobs:
       - save_cache:
           paths:
             - ~/.m2
-          key: circleci-demo-java-spring-{{ checksum "pom.xml" }}-{{ epoch }}
+          key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
       
       - run: mvn package
       
