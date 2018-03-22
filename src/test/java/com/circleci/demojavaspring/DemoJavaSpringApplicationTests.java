@@ -1,6 +1,7 @@
 package com.circleci.demojavaspring;
 
 import org.junit.Test;
+import org.junit.Assert;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
@@ -15,6 +16,11 @@ public class DemoJavaSpringApplicationTests {
 
 	@Test
 	public void contextLoads() {
+	}
+	
+	@Test
+	public void InduceFailure() {
+	assertEquals(1,0);
 	}
 
 }
