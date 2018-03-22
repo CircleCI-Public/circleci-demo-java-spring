@@ -20,7 +20,7 @@ public class DemoJavaSpringApplicationTests {
 	
 	@Test
 	public void InduceFailure() {
-	assertEquals(1,0);
+	fail("Let us make this test fail");
 	}
 
 }
