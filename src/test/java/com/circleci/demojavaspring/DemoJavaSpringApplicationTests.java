@@ -2,6 +2,7 @@ package com.circleci.demojavaspring;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
+import java.util.concurrent.TimeUnit;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
@@ -23,4 +24,39 @@ public class DemoJavaSpringApplicationTests {
 	fail("Let us make this test fail");
 	}
 
+	@Test
+	public void SampleTest1() {
+	assertTrue(true);
+	}
+
+	@Test
+	public void SampleTest2() {
+	assertTrue(true);
+	}
+	
+	@Test
+	public void SampleTest3() {
+	assertTrue(true);
+	}
+
+	@Test
+	public void SampleTest4() {
+	assertTrue(true);
+	}
+	
+	@Test
+	public void SampleTest5() {
+	assertTrue(true);
+	}
+	
+	@Test
+	public void SampleTest6() {
+	assertTrue(false);
+	}
+
+	@Test
+	public void SampleTest7() {
+	TimeUnit.SECONDS.sleep(60);
+	assertTrue(false);
+	}
 }
