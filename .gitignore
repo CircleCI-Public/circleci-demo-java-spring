@@ -29,3 +29,5 @@ buildNumber.properties
 # Editor and IDE Specific
 .vscode/
 .settings/
+
+.idea
