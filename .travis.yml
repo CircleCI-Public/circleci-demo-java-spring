@@ -1,3 +1,5 @@
 language: java
+services:
+  - postgresql
 sudo: false
 script: mvn package
