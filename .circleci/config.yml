@@ -24,11 +24,13 @@ jobs:
           paths:
             - ~/.m2
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
-      
-      - run: mvn package
-      
+
+      - run: mvn test
+
       - store_test_results:
           path: target/surefire-reports
+
+      - run: mvn package -DskipTests
       
       - store_artifacts:
           path: target/demo-java-spring-0.0.1-SNAPSHOT.jar
