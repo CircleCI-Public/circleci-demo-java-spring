@@ -2,7 +2,7 @@ language: java
 services:
   - postgresql
 before_script:
-  - psql -c 'create database postgres;' -U postgres
+  - psql -c 'create database circle_test;' -U postgres
 
 sudo: false
 script: mvn package
