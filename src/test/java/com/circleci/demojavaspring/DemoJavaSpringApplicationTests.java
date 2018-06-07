@@ -17,7 +17,7 @@ public class DemoJavaSpringApplicationTests {
 
 	@Test
 	public void contextLoads() {
-		assertTrue(Math.random() > 0.5);
+//		assertTrue(Math.random() > 0.5);
 	}
 
 }
