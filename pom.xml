@@ -8,6 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
+	
 	<name>demo-java-spring</name>
 	<description>Demo project for Java on CircleCI 2.0</description>
 
