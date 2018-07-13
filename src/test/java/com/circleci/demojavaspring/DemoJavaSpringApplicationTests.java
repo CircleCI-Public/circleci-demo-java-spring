@@ -16,5 +16,20 @@ public class DemoJavaSpringApplicationTests {
 	@Test
 	public void contextLoads() {
 	}
+        
+	@Test
+	public void Test1() {
+		fail("Let us make this test fail always 1");
+	}
+
+	@Test
+	public void Test2() {
+		fail("Let us make this test fail always 2");
+	}
+
+	@Test
+	public void Test3() {
+		fail("Let us make this test fail always 3");
+	}
 
 }
