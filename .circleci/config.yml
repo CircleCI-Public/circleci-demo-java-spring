@@ -5,7 +5,7 @@ jobs:
     working_directory: ~/circleci-demo-java-spring
 
     docker:
-      - image: circleci/openjdk:8-jdk-browsers
+      - image: circleci/openjdk:8-jdk-stretch
       - image: circleci/postgres:9.6.3-alpine
         environment:
           POSTGRES_USER: root
