@@ -57,4 +57,8 @@ jobs:
       # This will be empty for all nodes except the first one
       - store_artifacts:
           path: build/libs
-
+workflows:
+  version: 2
+  workflow:
+    jobs:
+    - build
