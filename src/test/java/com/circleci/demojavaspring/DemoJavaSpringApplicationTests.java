@@ -13,8 +13,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 @TestPropertySource("/test.properties")
 public class DemoJavaSpringApplicationTests {
 
-	@Test
-	public void contextLoads() {
-	}
+    @Test
+    public void contextLoads() {
+
+    }
 
 }

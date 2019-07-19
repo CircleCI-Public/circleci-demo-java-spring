@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Add Quote</title>
+    </head>
+    <body>
+        <form th:action="@{/quote/add}" method="post">
+            <div><label>Quote: <input type="text" name="quote"/> </label></div>
+            <div><input type="submit" value="Add Quote"/></div>
+        </form>
+    </body>
+</html>
