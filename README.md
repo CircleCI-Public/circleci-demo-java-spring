@@ -28,6 +28,10 @@ Start up the Java application:
 ./gradlew bootRun
 ```
 
+Navigate to http://localhost:8080
+
+![Screenshot of index page](assets/index.png?raw=true "Screenshot of index page")
+
 ## License
 
 Copyright © 2019 CircleCI
