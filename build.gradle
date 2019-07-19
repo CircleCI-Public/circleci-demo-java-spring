@@ -1,0 +1,33 @@
+plugins {
+    id 'org.springframework.boot' version '2.1.6.RELEASE'
+    id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.circleci'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.11'
+
+repositories {
+    mavenCentral()
+}
+
+// Currently only needed for spring-boot-devtools
+// https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile group: 'org.webjars', name: 'bootstrap', version: '3.3.7'
+    runtime 'org.postgresql:postgresql:42.2.6'
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
+}
