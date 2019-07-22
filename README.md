@@ -11,6 +11,7 @@ This application uses the following tools:
 * Thymeleaf
 
 You can follow along with this project by reading the [documentation](https://circleci.com/docs/2.0/language-java/).
+An older version of this sample project that uses Maven is accessible [here](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/maven) though it is no longer being actively maintained.
 
 ## Local Development
 
