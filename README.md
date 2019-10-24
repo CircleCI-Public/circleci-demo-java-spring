@@ -16,22 +16,23 @@ An older version of this sample project that uses Maven is accessible [here](htt
 ## Local Development
 
 ### Starting the application
-
-Start up a PostgreSQL Database Docker container:
-
 ```
-docker run -e POSTGRES_USER=postgres -e POSTGRES_DB=circle_test -p 5432:5432 -itd circleci/postgres:12-alpine
-```
-
-Start up the Java application:
-
-```
-./gradlew bootRun
+./gradlew bootRunDev
 ```
 
 Navigate to http://localhost:8080
 
 ![Screenshot of index page](assets/index.png?raw=true "Screenshot of index page")
+
+We use the [H2 Database](https://www.h2database.com/html/main.html) in memory for 
+local development. You can access the datbase UI at [http://localhost:8080/h2-console](http://localhost:8080/h2-console) 
+with the following credentials. 
+
+```
+username: `sa`
+password: `password`
+JDBC URL: jdbc:h2:mem:testdb
+```
 
 ## License
 

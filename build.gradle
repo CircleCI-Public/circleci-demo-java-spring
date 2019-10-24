@@ -29,5 +29,16 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     compile group: 'org.webjars', name: 'bootstrap', version: '3.3.7'
     runtime 'org.postgresql:postgresql:42.2.6'
+    runtime 'com.h2database:h2'
     developmentOnly("org.springframework.boot:spring-boot-devtools")
+}
+
+task bootRunDev(type: org.springframework.boot.gradle.tasks.run.BootRun) {
+    group = 'Application'
+
+    doFirst() {
+        main = bootJar.mainClassName
+        classpath = sourceSets.main.runtimeClasspath
+        systemProperty 'spring.profiles.active', 'local'
+    }
 }
