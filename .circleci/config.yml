@@ -1,6 +1,34 @@
 version: 2
 jobs:
   build:
+    environment:
+      # Configure the JVM and Gradle to avoid OOM errors
+      _JAVA_OPTIONS: "-Xmx3g"
+      GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
+    docker:
+      - image: circleci/openjdk:11.0.3-jdk-stretch
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+      - restore_cache:
+          key: v1-gradle-cache-{{ checksum "build.gradle" }}
+      - run:
+          name: Install dependencies
+          command: ./gradlew build -x test
+      - save_cache:
+          paths:
+            - ~/.gradle/wrapper
+          key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+      - save_cache:
+          paths:
+            - ~/.gradle/caches
+          key: v1-gradle-cache-{{ checksum "build.gradle" }}
+      - persist_to_workspace:
+          root: .
+          paths:
+            - build
+  test:
     # Remove if parallelism is not desired
     parallelism: 2
     environment:
@@ -15,10 +43,8 @@ jobs:
           POSTGRES_DB: circle_test
     steps:
       - checkout
-      - restore_cache:
-          key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
-      - restore_cache:
-          key: v1-gradle-cache-{{ checksum "build.gradle" }}
+      - attach_workspace:
+          at: .
       - run:
           name: Run tests in parallel
           # Use "./gradlew test" instead if tests are not run in parallel
@@ -34,18 +60,17 @@ jobs:
             GRADLE_ARGS=$(echo $CLASSNAMES | awk '{for (i=1; i<=NF; i++) print "--tests",$i}')
             echo "Prepared arguments for Gradle: $GRADLE_ARGS"
             ./gradlew test $GRADLE_ARGS
-      - save_cache:
-          paths:
-            - ~/.gradle/wrapper
-          key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
-      - save_cache:
-          paths:
-            - ~/.gradle/caches
-          key: v1-gradle-cache-{{ checksum "build.gradle" }}
+      - run:
+          name: Generate code coverage report
+          command:
+            ./gradlew jacocoTestReport
       - store_test_results:
           path: build/test-results/test
       - store_artifacts:
           path: build/test-results/test
+          when: always
+      - store_artifacts:
+          path: build/reports/jacoco/test/html
           when: always
       - run:
           name: Assemble JAR
@@ -57,8 +82,12 @@ jobs:
       # This will be empty for all nodes except the first one
       - store_artifacts:
           path: build/libs
+
 workflows:
   version: 2
   workflow:
     jobs:
     - build
+    - test:
+        requires:
+          - build

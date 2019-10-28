@@ -1,9 +1,13 @@
+// Based on the guide here: https://guides.gradle.org/building-spring-boot-2-projects-with-gradle/
 plugins {
-    id 'org.springframework.boot' version '2.1.6.RELEASE'
     id 'java'
+    id 'com.gradle.build-scan' version '3.0'
+    id 'org.springframework.boot' version '2.2.0.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 }
 
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'jacoco'
 
 group = 'com.circleci'
 version = '0.0.1-SNAPSHOT'
@@ -23,13 +27,18 @@ configurations {
 }
 
 dependencies {
+    implementation 'org.springframework.boot:spring-boot-dependencies:2.2.0.RELEASE'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
     compile group: 'org.webjars', name: 'bootstrap', version: '3.3.7'
+
     runtime 'org.postgresql:postgresql:42.2.6'
     runtime 'com.h2database:h2'
+
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 }
 
@@ -42,3 +51,22 @@ task bootRunDev(type: org.springframework.boot.gradle.tasks.run.BootRun) {
         systemProperty 'spring.profiles.active', 'local'
     }
 }
+
+buildScan {
+    // always accept the terms of service
+    termsOfServiceUrl = 'https://gradle.com/terms-of-service'
+    termsOfServiceAgree = 'yes'
+
+    // always publish a build scan
+    publishAlways()
+}
+
+// Based on the guide here: https://github.com/codecov/example-gradle
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
+}
+
+check.dependsOn jacocoTestReport
