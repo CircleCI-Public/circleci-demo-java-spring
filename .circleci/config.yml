@@ -1,9 +1,72 @@
 version: 2.1
 
-orbs:
-  maven: circleci/maven@0.0.12
+commands:
+  restore_cache_cmd:
+    steps:
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+            - v1-dependencies-
+  save_cache_cmd:
+    steps:
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+  test:
+    steps:
+      - checkout
+      - restore_cache_cmd
+      - run: ./mvnw test
+      - save_cache_cmd
+  build:
+    steps:
+      - checkout
+      - restore_cache_cmd
+      - run: ./mvnw -Dmaven.test.skip=true package
+      - save_cache_cmd
+
+executors:
+ docker-executor:
+   docker:
+     - image: circleci/openjdk:9.0.4-12
+ machine-executor:
+   machine:
+     image: ubuntu-1604:201903-01
+
+jobs:
+  test-with-docker:
+    executor: docker-executor
+    steps:
+      - test
+
+  build-with-docker:
+    executor: docker-executor
+    steps:
+      - build
+
+  test-with-machine:
+    executor: machine-executor
+    steps:
+      - test
+
+  build-with-machine:
+    executor: machine-executor
+    steps:
+      - build
+
 
 workflows:
-  maven_test:
+  build-then-test-with-docker:
     jobs:
-      - maven/test # checkout, build, test, and upload test results
+      - build-with-docker
+      - test-with-docker:
+          requires:
+            - build-with-docker
+
+  build-then-test-with-machine:
+    jobs:
+      - build-with-machine
+      - test-with-machine:
+          requires:
+            - build-with-machine
