@@ -1,49 +1,31 @@
-# CircleCI 2.0 Java Demo Application using Gradle and Spring [![CircleCI status](https://circleci.com/gh/CircleCI-Public/circleci-demo-java-spring.svg "CircleCI status")](https://circleci.com/gh/CircleCI-Public/circleci-demo-java-spring)
 
-**Note:** This project is currently under substantial development to include additional use cases and show off more features of CircleCI.
+# Spring PetClinic Sample Application
+ 
+[![CircleCI](https://circleci.com/gh/annapamma/spring-petclinic/tree/2.1-orbs-config.svg?style=svg)](https://circleci.com/gh/annapamma/spring-petclinic/tree/2.1-orbs-config)
 
-If you are coming here form the [Java Language Guide](https://circleci.com/docs/2.0/language-java/#config-walkthrough) please follow along at [this revision](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/9dcdae5e2988b207e0ac9b6bb9cf8ed711fba4ad) before major changes began to take place.
+This is an example application showcasing how to run a Java app on CircleCI 2.1. This application uses the [Spring PetClinic sample project](https://projects.spring.io/spring-petclinic/).
+This readme includes pared down sample configs for different CircleCI features, including workspace, dependency caching, and parallelism.
 
-This message will be removed once the CircleCI documentation matches this repository again.
+To see how these steps would be configured in a 2.0 config, please check out the [master branch](https://github.com/annapamma/spring-petclinic/tree/master).
 
----
+## Sample configurations: version 2.1
+- [A basic build with an orb](#a-basic-build-with-an-orb)
 
-This is an example application showcasing how to run a Java app on CircleCI 2.0.
 
-This application uses the following tools:
+### A basic build with an orb
+```yaml
+version: 2.1
 
-* Gradle
-* Java 11
-* PostgreSQL
-* Spring Boot
-* Thymeleaf
+orbs:
+  maven: circleci/maven@0.0.12
 
-You can follow along with this project by reading the [documentation](https://circleci.com/docs/2.0/language-java/).
-An older version of this sample project that uses Maven is accessible [here](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/maven) though it is no longer being actively maintained.
-
-## Local Development
-
-### Starting the application
+workflows:
+  maven_test:
+    jobs:
+      - maven/test # checkout, build, test, and upload test results
 ```
-./gradlew bootRunDev
-```
+This config uses the language-specific orb to replace any executors, build tools, and commands available. 
+Here we are using the [maven orb](https://circleci.com/orbs/registry/orb/circleci/maven), which simplifies building and testing Java projects using Maven. 
+The `maven/test` command checks out the code, builds, tests, and uploads the test result. 
+The parameters of this command can be customized. See the [maven orb docs](https://circleci.com/orbs/registry/orb/circleci/maven) for more information.
 
-Navigate to http://localhost:8080
-
-![Screenshot of index page](assets/index.png?raw=true "Screenshot of index page")
-
-We use the [H2 Database](https://www.h2database.com/html/main.html) in memory for
-local development. You can access the datbase UI at [http://localhost:8080/h2-console](http://localhost:8080/h2-console)
-with the following credentials.
-
-```
-username: `sa`
-password: `password`
-JDBC URL: jdbc:h2:mem:testdb
-```
-
-## License
-
-Copyright © 2019 CircleCI
-
-Distributed under the MIT license, see the file LICENSE.
