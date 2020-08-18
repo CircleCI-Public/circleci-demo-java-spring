@@ -86,8 +86,15 @@ jobs:
 workflows:
   version: 2
   workflow:
+    triggers:
+      - schedule:
+        fitlers:
+          branches:
+            only:
+              - master
     jobs:
     - build
     - test:
         requires:
           - build
+
