@@ -1,0 +1,21 @@
+version: "3.7"
+services:
+  db:
+    image: postgres:12
+    ports:
+      - "5432:5432"
+    secrets:
+      - db-password
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - spring-postgres
+    environment:
+      - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
+volumes:
+  db-data:
+secrets:
+  db-password:
+    file: db/passwordfile.txt
+networks:
+  spring-postgres:
