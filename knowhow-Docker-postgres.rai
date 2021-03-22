@@ -1,0 +1,30 @@
+gradle jedoch nur JDK 11
+gradle build clean
+
+oder
+
+maven mit JDK 15
+mvn clean
+mvn spring-boot:run
+
+docker run -p 5432:5432 -d -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=postgres -v pgdata:/var/lib/postgresql/data postgres
+oder
+docker-compose up -f docker-compose-postgres-only.yml
+
+mit heidisql
+Verbindung mit port 5432 / postgres / postgres
+
+DROP TABLE IF EXISTS student;
+CREATE TABLE "student001" (
+	"student_id" SERIAL PRIMARY KEY,
+	"student_branch" VARCHAR(255) NULL,
+	"student_email" VARCHAR(255) NULL,
+	"student_name" VARCHAR(255) NULL
+)
+;
+
+INSERT INTO student001 ( student_branch, student_email, student_name) VALUES
+	( 'BCA', 'dolly@gmail.com', 'MDolly'),
+	( 'B-Tech', 'rainier@gmail.com', 'rainier'),
+	('M-Tech', 'ula1983@email.de', 'Ula'),
+	('B-Tech', 'ula@gmail.de', 'Ula Habich 29.03.1983 meet 2015 (18.09.2015)),(01.11.2015),(21.12.2015) and 2016 (23.01.2016'));

@@ -4,6 +4,8 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**
 !**/src/test/**
+### maven I introduced it 16032020, runs with JDK15 ###
+target/
 
 ### STS ###
 .apt_generated
