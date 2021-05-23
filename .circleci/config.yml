@@ -7,9 +7,9 @@ jobs:
     steps:
       - checkout
       - heroku/install
-      - run:
-          command: heroku plugins:install java
-          command: heroku deploy:jar demo-0.0.1-SNAPSHOT.jar --app $HEROKU_APP_NAME
+      - run: |
+          heroku plugins:install java
+          heroku deploy:jar demo-0.0.1-SNAPSHOT.jar --app $HEROKU_APP_NAME
   build:
     # Remove if parallelism is not desired
     parallelism: 2
