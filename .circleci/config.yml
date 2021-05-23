@@ -69,10 +69,9 @@ jobs:
             # Skip this for other nodes
             if [ "$CIRCLE_NODE_INDEX" == 0 ]; then
               ./gradlew assemble
+              mkdir -p workspace
+              cp -r build/libs workspace
             fi
-            echo $CIRCLE_NODE_INDEX
-      - run: mkdir -p workspace
-      - run: cp -r build/libs workspace
 
       - persist_to_workspace:
           root: workspace
