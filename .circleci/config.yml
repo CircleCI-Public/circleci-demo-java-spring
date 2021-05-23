@@ -22,6 +22,10 @@ jobs:
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: circleci/postgres:12-alpine
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: circle_test
     steps: # a collection of executable commands
       - checkout # check out source code to working directory
       # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
