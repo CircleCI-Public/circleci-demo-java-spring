@@ -66,10 +66,10 @@ jobs:
       - run:
           name: Assemble JAR
           command: |
+            mkdir -p workspace
             # Skip this for other nodes
             if [ "$CIRCLE_NODE_INDEX" == 0 ]; then
               ./gradlew assemble
-              mkdir -p workspace
               cp -r build/libs workspace
             fi
 
