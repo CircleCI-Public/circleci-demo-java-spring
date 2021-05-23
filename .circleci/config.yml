@@ -73,9 +73,9 @@ workflows:
   version: 2
   default:
     jobs:
-    - build
-    - deploy:
-        requires:
-          - build
-          
+      - build
+      - deploy:
+          requires:
+            - build
+
 
