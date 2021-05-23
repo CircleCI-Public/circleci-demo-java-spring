@@ -70,6 +70,7 @@ jobs:
             if [ "$CIRCLE_NODE_INDEX" == 0 ]; then
               ./gradlew assemble
             fi
+            echo $CIRCLE_NODE_INDEX
       - run: mkdir -p workspace
       - run: cp -r build/libs workspace
 
