@@ -5,11 +5,12 @@ jobs:
   deploy:
     executor: heroku/default
     steps:
-      - checkout
+      - attach_workspace:
+          at: /tmp/workspace
       - heroku/install
       - run: |
           heroku plugins:install java
-          heroku deploy:jar build/libs/demo-0.0.1-SNAPSHOT.jar --app $HEROKU_APP_NAME
+          heroku deploy:jar /tmp/workspace/demo-0.0.1-SNAPSHOT.jar --app $HEROKU_APP_NAME
   build:
     # Remove if parallelism is not desired
     parallelism: 2
@@ -69,6 +70,12 @@ jobs:
             if [ "$CIRCLE_NODE_INDEX" == 0 ]; then
               ./gradlew assemble
             fi
+      - run: mkdir -p workspace
+      - run: cp build/libs workspace
+
+      - persist_to_workspace:
+          root: workspace
+
       # As the JAR was only assembled in the first build container, build/libs will be empty in all the other build containers.
       - store_artifacts:
           path: build/libs
