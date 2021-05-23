@@ -46,8 +46,7 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: Run tests in parallel
-          # Use "./gradlew test" instead if tests are not run in parallel
+          name: Run tests
           command: ./gradlew test
       - run:
           name: Generate code coverage report
