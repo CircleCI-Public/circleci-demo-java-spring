@@ -10,7 +10,7 @@ jobs:
       - heroku/install
       - run: |
           heroku plugins:install java
-          heroku deploy:jar /tmp/workspace/demo-0.0.1-SNAPSHOT.jar --app $HEROKU_APP_NAME
+          heroku deploy:jar /tmp/workspace/build/libs/demo-0.0.1-SNAPSHOT.jar --app $HEROKU_APP_NAME
   build:
     # Remove if parallelism is not desired
     parallelism: 2
@@ -71,7 +71,7 @@ jobs:
               ./gradlew assemble
             fi
       - run: mkdir -p workspace
-      - run: cp build/libs workspace
+      - run: cp -r build/libs workspace
 
       - persist_to_workspace:
           root: workspace
