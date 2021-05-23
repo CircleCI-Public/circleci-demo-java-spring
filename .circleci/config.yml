@@ -46,10 +46,6 @@ jobs:
       GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
     docker:
       - image: circleci/openjdk:11.0.3-jdk-stretch
-      - image: circleci/postgres:12-alpine
-        environment:
-          POSTGRES_USER: postgres
-          POSTGRES_DB: circle_test
     steps:
       - checkout
       - attach_workspace:
@@ -82,7 +78,7 @@ jobs:
 
 workflows:
   version: 2
-  workflow:
+  default:
     jobs:
     - build
     - test:
