@@ -8,10 +8,7 @@ jobs:
       - checkout
       - heroku/install
       - run:
-          command: >
-            echo "The command above installs Heroku, the command below deploys.
-            What you do inbetween is up to you!"
-      - heroku/deploy-via-git
+          command: heroku deploy:jar demo-0.0.1-SNAPSHOT.jar --app $HEROKU_APP_NAME
   build:
     environment:
       # Configure the JVM and Gradle to avoid OOM errors
@@ -94,3 +91,4 @@ workflows:
     - deploy:
         requires:
           - test
+
