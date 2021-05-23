@@ -72,9 +72,9 @@ jobs:
             fi
       - run: mkdir -p workspace
       - run: cp build/libs workspace
-
       - persist_to_workspace:
           root: workspace
+          paths: .
 
       # As the JAR was only assembled in the first build container, build/libs will be empty in all the other build containers.
       - store_artifacts:
