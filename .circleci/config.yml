@@ -70,12 +70,12 @@ jobs:
             # Skip this for other nodes
             if [ "$CIRCLE_NODE_INDEX" == 0 ]; then
               ./gradlew assemble
-              cp -r build/libs workspace
+              cp -r build workspace
             fi
 
       - persist_to_workspace:
           root: workspace
-          paths: build/libs
+          paths: .
 
       # As the JAR was only assembled in the first build container, build/libs will be empty in all the other build containers.
       - store_artifacts:
