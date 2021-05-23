@@ -1,16 +1,5 @@
 version: 2.1
-orbs:
-  heroku: circleci/heroku@1.2.6
 jobs:
-  deploy:
-    executor: heroku/default
-    steps:
-      - attach_workspace:
-          at: /tmp/workspace
-      - heroku/install
-      - run: |
-          heroku plugins:install java
-          heroku deploy:jar /tmp/workspace/build/libs/demo-0.0.1-SNAPSHOT.jar --app ${HEROKU_APP_NAME}
   build:
     # Remove if parallelism is not desired
     parallelism: 2
@@ -66,28 +55,14 @@ jobs:
       - run:
           name: Assemble JAR
           command: |
-            mkdir -p workspace
             # Skip this for other nodes
             if [ "$CIRCLE_NODE_INDEX" == 0 ]; then
               ./gradlew assemble
-              cp -r build workspace
             fi
-
-      - persist_to_workspace:
-          root: workspace
-          paths: .
 
       # As the JAR was only assembled in the first build container, build/libs will be empty in all the other build containers.
       - store_artifacts:
           path: build/libs
 
-workflows:
-  version: 2
-  default:
-    jobs:
-      - build
-      - deploy:
-          requires:
-            - build
 
 
