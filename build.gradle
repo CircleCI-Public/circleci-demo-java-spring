@@ -27,19 +27,20 @@ configurations {
 }
 
 dependencies {
+    implementation fileTree(dir: 'libs', include: '*.jar')
     implementation 'org.springframework.boot:spring-boot-dependencies:2.2.0.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
     compile group: 'org.webjars', name: 'bootstrap', version: '3.3.7'
-
     runtime 'org.postgresql:postgresql:42.2.6'
     runtime 'com.h2database:h2'
-
     developmentOnly("org.springframework.boot:spring-boot-devtools")
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.projectlombok:lombok'
 }
 
 task bootRunDev(type: org.springframework.boot.gradle.tasks.run.BootRun) {
