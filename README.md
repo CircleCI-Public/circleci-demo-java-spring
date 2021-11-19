@@ -1,5 +1,7 @@
 # CircleCI 2.0 Java Demo Application using Gradle and Spring [![CircleCI status](https://circleci.com/gh/CircleCI-Public/circleci-demo-java-spring.svg "CircleCI status")](https://circleci.com/gh/CircleCI-Public/circleci-demo-java-spring)
 
+New CHANGE!
+
 **Note:** This project is currently under substantial development to include additional use cases and show off more features of CircleCI.
 
 If you are coming here form the [Java Language Guide](https://circleci.com/docs/2.0/language-java/#config-walkthrough) please follow along at [this revision](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/9dcdae5e2988b207e0ac9b6bb9cf8ed711fba4ad) before major changes began to take place.
